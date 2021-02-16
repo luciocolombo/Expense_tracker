@@ -20,15 +20,15 @@ function App() {
     setTotal(total*1+amount*1)
     
   }
-/*   const clearNow=function(){
-  /*   window.location.reload(false); */
-/*     localStorage.clear()
-  } */ 
+   const clearNow=function(){
+   window.location.reload(false);
+    localStorage.clear()
+   }
  
   return (
     <div>
     <div className="App mx-5 border ">
-      <InputBar btnHandler={btnHandler} /* clearNow={clearNow} *//>
+      <InputBar btnHandler={btnHandler} clearNow={clearNow}/>
         <div className=" d-flex ">
           <div className="border comp">
             <h3 className=" border"> Description</h3>
