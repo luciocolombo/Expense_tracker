@@ -1,5 +1,4 @@
 .App {
-  width: 75%;
   margin-top: 2%;
 }
 .comp {
@@ -7,4 +6,27 @@
 }
 input {
   border: 1px solid rgba(0, 0, 0, 0.521);
+  width: 200px;
+}
+footer {
+  background-color: burlywood;
+  text-align: center;
+  border: 1px solid black;
+  margin-top: 100px;
+  margin-left: 3%;
+  margin-right: 3%;
+  min-width: 500px;
+}
+.btnadd {
+  min-width: 150px;
+}
+
+.amount {
+  text-align: center;
+}
+.description {
+  text-align: center;
+}
+.date {
+  text-align: center;
 }
