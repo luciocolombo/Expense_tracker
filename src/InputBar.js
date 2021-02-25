@@ -9,6 +9,7 @@ function InputBar({btnHandler , clearNow  }) {
         btnHandler({description, amount, date});
         setAmount("");
         setDescription("")
+       
     }
     const onClick1=function(){
         description&&amount&&date? 
