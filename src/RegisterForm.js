@@ -5,7 +5,6 @@ import { Card, Button } from 'react-bootstrap';
 
 function RegisterForm() {
     const [input, setInput]=useState({user:"",password:""})
-    
     function handleChange(event){
         const {name, value}=event.target;
         
@@ -27,11 +26,11 @@ function RegisterForm() {
         }
         axios.post('http://localhost:4000/posts',newUser)
         .then((response) => {
-            if(response.data.message.substring(0,6)=="E11000"){
-                alert("This user already exists")
-            }else{
-            console.log("Usuario enviado a DB")
+            //response.data.message exists when there is an error, like when the user exists.
+            if(response.data.message===undefined){alert("This user already exists")}
+            else{
             alert("Usuario Creado")
+            window.location.href="./app"
             }
      
           }, (error) => {
