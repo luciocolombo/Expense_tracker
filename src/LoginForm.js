@@ -33,6 +33,9 @@ function LoginForm() {
                     console.log("Acceso concedido")
                     var existe=true;
                     window.location.href="./app"
+                    localStorage.setItem("user",response.data[0].user)
+                    localStorage.setItem("tasks",response.data[0].expenses)
+
                     const cookies=new Cookies();
                     cookies.set("user",User.user,{path:'/'})
                    
