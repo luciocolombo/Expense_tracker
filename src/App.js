@@ -39,6 +39,7 @@ function App() {
   const btnHandler= function({amount, description, date}){
     var id=id+1
     const dateString=date.toString().slice(3,16)
+    
     setInfoArray([...infoArray, {amount, description, dateString}])
     setTotal(total*1+amount*1)
     localStorage.setItem("tasks",infoArray)
@@ -69,7 +70,7 @@ function App() {
             <Dashboard/>
             <div className="App mx-5 border ">
               <InputBar btnHandler={btnHandler} clearNow={clearNow}/>
-              <table class="table table-striped">
+              <table className="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>

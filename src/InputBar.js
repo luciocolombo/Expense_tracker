@@ -3,7 +3,7 @@ import DatePicker from 'react-date-picker'
 
 function InputBar({btnHandler , clearNow  }) {
     const [description, setDescription] =useState("")
-    const [amount, setAmount] =useState(null)
+    const [amount, setAmount] =useState("")
     const [date, setDate] = useState(new Date());
     const intermFunc= function(){
         btnHandler({description, amount, date});

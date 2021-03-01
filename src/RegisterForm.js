@@ -22,16 +22,20 @@ function RegisterForm() {
        /*  console.log(input) */
         const newUser={
             user:input.user,
-            password:input.password
+            password:input.password,
+            
         }
         axios.post('http://localhost:4000/posts',newUser)
         .then((response) => {
             //response.data.message exists when there is an error, like when the user exists.
-            if(response.data.message===undefined){alert("This user already exists")}
-            else{
+            console.log(response)
+            /* if(response.data.message===undefined){alert("This user already exists")
+           //Crea el __id que lo vuelve unico y permite crear usuarios iguales
+            }else{ */
             alert("Usuario Creado")
             window.location.href="./app"
-            }
+            localStorage.setItem("user",newUser.user)
+            /* } */
      
           }, (error) => {
             console.log(error);

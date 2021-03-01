@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {Link} from "react-router-dom"
 import axios from "axios"
 import { Card, Button } from 'react-bootstrap';
-import Cookies from "universal-cookie"
 function LoginForm() {
     const [input, setInput]=useState({user:"",password:""})
     
@@ -34,10 +33,14 @@ function LoginForm() {
                     var existe=true;
                     window.location.href="./app"
                     localStorage.setItem("user",response.data[0].user)
-                    localStorage.setItem("tasks",response.data[0].expenses)
+                    response.data[0].expenses?
+                    localStorage.setItem("tasks",response.data[0].expenses):
+                    localStorage.setItem("tasks",[])
+                   /*  if(response.data[0].expenses!=null&&undefined){
+                        localStorage.setItem("tasks",response.data[0].expenses)}
+                    }else{localStorage.setItem("tasks",[""])}  //para q no rompa el JSON.parser */
+                     
 
-                    const cookies=new Cookies();
-                    cookies.set("user",User.user,{path:'/'})
                    
                     break;
                 }
