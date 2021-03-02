@@ -21,12 +21,12 @@ function LoginForm() {
         event.preventDefault();
         const User={
             user:input.user,
-            password:input.password
-        }
-        axios.get('http://localhost:4000/posts',User)
-        .then((response) => {
-            console.log(response)
+            password:input.password,
             
+        }
+        axios.get('http://localhost:4000/posts')
+        .then((response) => {
+          
             for(let x=0;x<response.data.length;x++){
                 if(response.data[x].user==User.user&&response.data[x].password==User.password){
                     console.log("Acceso concedido")
@@ -34,14 +34,8 @@ function LoginForm() {
                     window.location.href="./app"
                     localStorage.setItem("user",response.data[0].user)
                     response.data[0].expenses?
-                    localStorage.setItem("tasks",response.data[0].expenses):
-                    localStorage.setItem("tasks",[])
-                   /*  if(response.data[0].expenses!=null&&undefined){
-                        localStorage.setItem("tasks",response.data[0].expenses)}
-                    }else{localStorage.setItem("tasks",[""])}  //para q no rompa el JSON.parser */
-                     
-
-                   
+                    localStorage.setItem("tasks",JSON.stringify(response.data[0].expenses)):
+                    localStorage.setItem("tasks",[])   
                     break;
                 }
             }

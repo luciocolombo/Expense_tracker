@@ -28,12 +28,14 @@ function RegisterForm() {
         axios.post('http://localhost:4000/posts',newUser)
         .then((response) => {
             //response.data.message exists when there is an error, like when the user exists.
-            if(response.data.message!==undefined){alert("This user already exists")
-            }else{
-            alert("Usuario Creado")
-            window.location.href="./app"
-            localStorage.setItem("user",newUser.user)
-            }
+           if(newUser.user!==""&&newUser.password!=="") {    
+                if(response.data.message!==undefined){alert("This user already exists")
+                }else{
+                alert("User created")
+                window.location.href="./app"
+                localStorage.setItem("user",newUser.user)
+                }
+            }else{alert("Please complete both fields")}
         });
     }
 

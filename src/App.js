@@ -9,14 +9,21 @@ import axios from 'axios'
 
 function App() {
  
-  
-  const localData =localStorage.getItem("tasks")
-  const [infoArray, setInfoArray]=useState(localData? JSON.parse(localData):[])
-  const [total, setTotal]=useState(0)
+  //defino el info array y total
+  var localDataJson =JSON.parse(localStorage.getItem("tasks"))
+  var [localDataArray,setLocalDataArray]=useState(Object.values(localDataJson))
+  var [infoArray, setInfoArray]=useState(/* localData? JSON.parse(localData): */[])
+  var [total, setTotal]=useState(0)
   var id=1
   
+/*   useEffect(()=>{
+    //actualizo el valor del array cada vez q cambia el local storage (localdatajson es localstorage parseado)
+    setLocalDataArray(Object.values(localDataJson))
+    
+  },[localDataJson]) */
 
-    useEffect(()=>{
+    //esto intenta meter los nuevos cambios a LOCAL STORAGE, los de infoarray y total
+   /*  useEffect(()=>{
     localStorage.setItem("tasks",JSON.stringify(infoArray))
     const kk=JSON.parse(localStorage.getItem("tasks"))
     let summm=0
@@ -25,16 +32,17 @@ function App() {
       summm=kk[x]["amount"]*1+summm
       setTotal(summm)
       }
-  },[infoArray])
+  },[infoArray]) */
 
-     useEffect(()=>
+  //esto sube a la DB los cambios de TASKS
+   /*   useEffect(()=>
       {
       const user=localStorage.getItem("user")
-      axios.patch(`http://localhost:4000/posts/${user}`,{expenses:localStorage.getItem("taks")});
+      axios.patch(`http://localhost:4000/posts/${user}`,{expenses:localStorage.getItem("tasks")});
       }
       ,[infoArray]  //Ver setTimer y cantidad de pedidos a axios. Crear ruta PATCH
      
-    ) 
+    )  */
 
   const btnHandler= function({amount, description, date}){
     var id=id+1
@@ -42,7 +50,12 @@ function App() {
     
     setInfoArray([...infoArray, {amount, description, dateString}])
     setTotal(total*1+amount*1)
-    localStorage.setItem("tasks",infoArray)
+    var tasksArray=[""]
+    const taskString=localStorage.getItem("tasks")
+    tasksArray = JSON.parse(taskString);
+    console.log(taskString)
+    tasksArray.push([...infoArray]);
+    localStorage.setItem("tasks", JSON.stringify(tasksArray));
     localStorage.setItem("total",total)
     
   }
@@ -55,7 +68,8 @@ function App() {
   /*   que interprete USER como variable. Luegoe de patchear debe actualizar las cookies.get(data) */
     
    }
- 
+  
+   
   return (
     <Router>
         <Route path="/" exact> 
@@ -81,10 +95,17 @@ function App() {
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">{infoArray.map((x)=><li className="ml-4 text-decoration-none">{infoArray.indexOf(x)+1}  </li> )}</th>
+              
+            {/*   EMBELLECER Y AGREGAR TOTAL */}
+             <td>{localDataArray.map((x)=><li>{Object.values(x)}</li>)}</td>      
+                    
+                
+
+
+                   {/*  <th scope="row">{infoArray.map((x)=><li className="ml-4 text-decoration-none">{infoArray.indexOf(x)+1}  </li> )}</th>
                     <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">{x.description}  </li> )}</td>
                     <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></li> )}</td>
-                    <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">{x.dateString}  </li> )}</td>
+                    <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">{x.dateString}  </li> )}</td> */}
                   </tr>
                 </tbody>
               </table>
