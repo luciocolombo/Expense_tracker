@@ -10,9 +10,9 @@ import axios from 'axios'
 function App() {
  
   //defino el info array y total
-  var localDataJson =JSON.parse(localStorage.getItem("tasks"))
-  var [localDataArray,setLocalDataArray]=useState(Object.values(localDataJson))
-  var [infoArray, setInfoArray]=useState(/* localData? JSON.parse(localData): */[])
+  var localDataJson =JSON.parse(localStorage.getItem("tasks")) //aca tengo un objeto de objetos
+  var [localDataArray,setLocalDataArray]=useState(Object.values(localDataJson|| {}))
+  var [infoArray, setInfoArray]=useState( localDataJson)
   var [total, setTotal]=useState(0)
   var id=1
   
@@ -45,9 +45,15 @@ function App() {
     )  */
 
   const btnHandler= function({amount, description, date}){
-    var id=id+1
-    const dateString=date.toString().slice(3,16)
+    setLocalDataArray([...localDataArray,"3"/* {description:description,amount:amount,date:date} */])
+    console.log("localdataarray ", localDataArray)
+    console.log({description, amount, date})
+
+  /*   var localStorageArray=[localDataJson].push({description:"description",amount:"amount",date:"date"}) */
     
+    /* var id=id+1
+    const dateString=date.toString().slice(3,16) */
+    /* 
     setInfoArray([...infoArray, {amount, description, dateString}])
     setTotal(total*1+amount*1)
     var tasksArray=[""]
@@ -56,7 +62,7 @@ function App() {
     console.log(taskString)
     tasksArray.push([...infoArray]);
     localStorage.setItem("tasks", JSON.stringify(tasksArray));
-    localStorage.setItem("total",total)
+    localStorage.setItem("total",total) */
     
   }
    const clearNow=function(){
@@ -97,8 +103,9 @@ function App() {
                   <tr>
               
             {/*   EMBELLECER Y AGREGAR TOTAL */}
-             <td>{localDataArray.map((x)=><li>{Object.values(x)}</li>)}</td>      
-                    
+              <td>{localDataArray && localDataArray.map((x)=><li>{Object.values(x)}</li>)}</td>  
+       
+             
                 
 
 
@@ -111,7 +118,7 @@ function App() {
               </table>
           
             </div>
-            <h3 className="col-11 border text-right mt-3 ml-5 ">Total <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h3>
+         {/*    <h3 className="col-11 border text-right mt-3 ml-5 ">Total <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h3> */}
             <footer>This App was created by Lucio Colombo. It lets you save your data expenses for better money management</footer>
           </div>
       </Route>
