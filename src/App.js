@@ -10,7 +10,8 @@ import axios from 'axios'
 function App() {
  
   //Divido los items en los ya guarados en DB de antes (arrayofobjects) y los nuevos en (arraynewobjects)
-  var ArrayofObjects=Object.values(JSON.parse(localStorage.getItem("tasks"))||{})
+  var tasks=localStorage.getItem("tasks")
+  var ArrayofObjects=Object.values(tasks!=""?JSON.parse(tasks)||{}:[])
   var [arrayNewObjects,setArrayNewObjects]=useState([])
   var [total, setTotal]=useState(()=>{
     var partial=0
@@ -29,8 +30,9 @@ function App() {
     const newData={description,amount,date}
     setArrayNewObjects([...arrayNewObjects,{description:description,amount:amount,date:date}])
      setTotal(prevTotal=>prevTotal*1+amount*1)
-
-     axios.patch('http://localhost:4000/posts',newData)
+    const user=localStorage.getItem("user")
+    
+     axios.patch( `http://localhost:4000/posts/${user} `,newData)
      .then((response) => {console.log("info enviada a DB")})
      
   }
