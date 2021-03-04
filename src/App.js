@@ -9,72 +9,38 @@ import axios from 'axios'
 
 function App() {
  
-  //defino el info array y total
-  var localDataJson =JSON.parse(localStorage.getItem("tasks")) //aca tengo un objeto de objetos
-  var [localDataArray,setLocalDataArray]=useState(Object.values(localDataJson|| {}))
-  var [infoArray, setInfoArray]=useState( localDataJson)
-  var [total, setTotal]=useState(0)
-  var id=1
-  
-/*   useEffect(()=>{
-    //actualizo el valor del array cada vez q cambia el local storage (localdatajson es localstorage parseado)
-    setLocalDataArray(Object.values(localDataJson))
-    
-  },[localDataJson]) */
+  //Divido los items en los ya guarados en DB de antes (arrayofobjects) y los nuevos en (arraynewobjects)
+  var ArrayofObjects=Object.values(JSON.parse(localStorage.getItem("tasks"))||{})
+  var [arrayNewObjects,setArrayNewObjects]=useState([])
+  var [total, setTotal]=useState(()=>{
+    var partial=0
+    for(let z=0;z<ArrayofObjects.length;z++){
+       partial=partial+ArrayofObjects[z].amount*1 
+    }
+    for(let z=0;z<arrayNewObjects;z++){
+       partial=partial+arrayNewObjects[z].amount *1
+   
+    }
+    return partial
+  }) 
 
-    //esto intenta meter los nuevos cambios a LOCAL STORAGE, los de infoarray y total
-   /*  useEffect(()=>{
-    localStorage.setItem("tasks",JSON.stringify(infoArray))
-    const kk=JSON.parse(localStorage.getItem("tasks"))
-    let summm=0
-    //aca hago la suma del total
-      for(let x=0;x<kk.length;x++){
-      summm=kk[x]["amount"]*1+summm
-      setTotal(summm)
-      }
-  },[infoArray]) */
-
-  //esto sube a la DB los cambios de TASKS
-   /*   useEffect(()=>
-      {
-      const user=localStorage.getItem("user")
-      axios.patch(`http://localhost:4000/posts/${user}`,{expenses:localStorage.getItem("tasks")});
-      }
-      ,[infoArray]  //Ver setTimer y cantidad de pedidos a axios. Crear ruta PATCH
-     
-    )  */
-
+ 
   const btnHandler= function({amount, description, date}){
-    setLocalDataArray([...localDataArray,"3"/* {description:description,amount:amount,date:date} */])
-    console.log("localdataarray ", localDataArray)
-    console.log({description, amount, date})
+    const newData={description,amount,date}
+    setArrayNewObjects([...arrayNewObjects,{description:description,amount:amount,date:date}])
+     setTotal(prevTotal=>prevTotal*1+amount*1)
 
-  /*   var localStorageArray=[localDataJson].push({description:"description",amount:"amount",date:"date"}) */
-    
-    /* var id=id+1
-    const dateString=date.toString().slice(3,16) */
-    /* 
-    setInfoArray([...infoArray, {amount, description, dateString}])
-    setTotal(total*1+amount*1)
-    var tasksArray=[""]
-    const taskString=localStorage.getItem("tasks")
-    tasksArray = JSON.parse(taskString);
-    console.log(taskString)
-    tasksArray.push([...infoArray]);
-    localStorage.setItem("tasks", JSON.stringify(tasksArray));
-    localStorage.setItem("total",total) */
-    
+     axios.patch('http://localhost:4000/posts',newData)
+     .then((response) => {console.log("info enviada a DB")})
+     
   }
+  console.log(total)
+  
    const clearNow=function(){
    window.location.reload(false);
     localStorage.clear("tasks")
     localStorage.clear("total")
-
-    //ACA HAGO AXIOS.DELETE
-  /*   que interprete USER como variable. Luegoe de patchear debe actualizar las cookies.get(data) */
-    
    }
-  
    
   return (
     <Router>
@@ -101,24 +67,25 @@ function App() {
                 </thead>
                 <tbody>
                   <tr>
-              
-            {/*   EMBELLECER Y AGREGAR TOTAL */}
-              <td>{localDataArray && localDataArray.map((x)=><li>{Object.values(x)}</li>)}</td>  
-       
-             
-                
+                    
+                    <th scope="row">{ArrayofObjects.map((x)=><li className="ml-4 text-decoration-none">{ArrayofObjects.indexOf(x)+1}  </li> )}</th>
+                    <td>{ArrayofObjects.map((x)=><li className="ml-4 list-unstyled">{x.description}  </li> )}</td>
+                    <td>{ArrayofObjects.map((x)=><li className="ml-4 list-unstyled">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></li> )}</td>
+                    <td>{ArrayofObjects.map((x)=><li className="ml-4 list-unstyled">{x.date}  </li> )}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">{arrayNewObjects && arrayNewObjects.map((x)=><li className="ml-4 text-decoration-none">{ArrayofObjects.length+1+arrayNewObjects.indexOf(x)}  </li> )}</th>
+                    <td>{arrayNewObjects && arrayNewObjects.map((x)=><li className="ml-4 list-unstyled">{x.description}  </li> )}</td>
+                    <td>{arrayNewObjects && arrayNewObjects.map((x)=><li className="ml-4 list-unstyled">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></li> )}</td>
+                    <td>{arrayNewObjects && arrayNewObjects.map((x)=><li className="ml-4 list-unstyled">{JSON.stringify(x.date).slice(1,11)}  </li> )}</td>
 
 
-                   {/*  <th scope="row">{infoArray.map((x)=><li className="ml-4 text-decoration-none">{infoArray.indexOf(x)+1}  </li> )}</th>
-                    <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">{x.description}  </li> )}</td>
-                    <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></li> )}</td>
-                    <td>{infoArray.map((x)=><li className="ml-4 list-unstyled">{x.dateString}  </li> )}</td> */}
                   </tr>
                 </tbody>
               </table>
           
             </div>
-         {/*    <h3 className="col-11 border text-right mt-3 ml-5 ">Total <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h3> */}
+         <h3 className="col-11 border text-right mt-3 ml-5 ">Total <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h3>
             <footer>This App was created by Lucio Colombo. It lets you save your data expenses for better money management</footer>
           </div>
       </Route>
