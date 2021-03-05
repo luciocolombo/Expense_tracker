@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {Link} from "react-router-dom"
 import axios from "axios"
 import { Card, Button } from 'react-bootstrap';
+import { useHistory } from "react-router-dom"
+
 function LoginForm() {
     const [input, setInput]=useState({user:"",password:""})
     
@@ -37,7 +39,10 @@ function LoginForm() {
                         axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
                         .then((res)=>{
                             localStorage.setItem("tasks",JSON.stringify(res))
-                            window.location.href="./app"
+                            /* let history = useHistory();
+                            history.push("/app"); */
+                            
+                            window.location.href='./app'
                         },(error)=>{console.log(error)})  
                         
                          
@@ -70,7 +75,7 @@ function LoginForm() {
                 <input className="d-block" onChange={handleChange} name="password" value={input.password} id="password" type="password" placeholder="Password"></input>
                 <Button className="d-block my-3" onClick={handleClick}>Login</Button>
             </form>
-                   <Link className="d-block" to="/">Not Registered? Register</Link>
+                   <Link className="d-block" to="/register">Not Registered? Register</Link>
                 </Card.Body>
             </Card>
         

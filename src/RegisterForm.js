@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link} from "react-router-dom"
 import axios from "axios"
 import { Card, Button } from 'react-bootstrap';
+import { useHistory } from "react-router-dom"
 
 function RegisterForm() {
     const [input, setInput]=useState({user:"",password:""})
@@ -32,8 +33,9 @@ function RegisterForm() {
                 if(response.data.message!==undefined){alert("This user already exists")
                 }else{
                 alert("User created")
-                window.location.href="./app"
-                localStorage.setItem("user",newUser.user)
+                /* let history = useHistory();
+                history.push("/app"); */
+                window.location.href='./app'
                 }
             }else{alert("Please complete both fields")}
         });
