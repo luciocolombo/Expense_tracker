@@ -1,14 +1,19 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
-function DeleteBtn() {
-    const deleteBtn=function(){
-        //AQUI VA EL AXIOS.DELETE
-    }
+
+
+function DeleteBtn({valueToDelete}) {
+
+   const handleDeleteValue=function(valueToDelete){
+   console.log(valueToDelete)
+  
+   }
+    
     return (
         <div>
-            <Button onClick={deleteBtn} className="btn btn-danger btndelete"></Button>
+            <Button onClick={handleDeleteValue} className="btn btn-danger btndelete"></Button>
         </div>
     )
-}
+    }
 
 export default DeleteBtn

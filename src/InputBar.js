@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import DatePicker from 'react-date-picker'
-
-function InputBar({btnHandler , clearNow  }) {
+import DeleteWarning from './DeleteWarning'
+function InputBar({btnHandler  }) {
     const [description, setDescription] =useState("")
     const [amount, setAmount] =useState("")
     const [date, setDate] = useState(new Date());
@@ -33,7 +33,8 @@ function InputBar({btnHandler , clearNow  }) {
                     </section>
                 <div className="w-100 ml-1 mt-1 text-center">
                     <button className="btn btn-primary w-25 mr-1 mt-2 btnadd" onClick={()=>{onClick1()}}>Add</button>
-                    <button className="btn btn-danger mt-2" onClick={()=>{clearNow()}}>Clear</button> 
+                  
+                    <DeleteWarning /> 
                 </div>
                 
             </form>     

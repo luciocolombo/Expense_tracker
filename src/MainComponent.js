@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import Dashboard from "./Dashboard"
 import axios from 'axios'
 import DeleteBtn from './DeleteBtn'
-import deleteWarning from './deleteWarning'
+import DeleteWarning from './DeleteWarning'
 
 function MainComponent() {
 //Divido los items en los ya guarados en DB de antes (arrayofobjects) y los nuevos en (arraynewobjects)
@@ -35,44 +35,42 @@ const btnHandler= function({amount, description, date}){
 }
 
 
- const clearNow=function(){
- console.log("deberia borrarse todo")
-
- }
 
     return (
         <div>
             <Dashboard/>
             <div className="App mx-5 border ">
-              <InputBar btnHandler={btnHandler} clearNow={clearNow}/>
+              <InputBar btnHandler={btnHandler} clearNow={<DeleteWarning/>}/>
               <table className="table table-striped">
-                <thead>
+                <thead >
                   <tr>
-                    <th scope="col">Delete Btn</th>
+                    <th scope="col">Delete</th>
                     <th scope="col">#</th>
                     <th scope="col">Description</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Date</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody>                  
+                    {ArrayofObjects[0] .map((x)=>
+                    <tr>
+                      <td className="my-4"><DeleteBtn valueToDelete={x.id}/></td>
+                      <th className="my-4">{ArrayofObjects[0].indexOf(x)+1}  </th>
+                      <td className="my-4 ">{x.description}  </td>
+                      <td className="my-4 ">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
+                      <td className="my-4">{x.date}  </td>
+                    </tr>
+                    )}
+                    {arrayNewObjects && arrayNewObjects.map((x)=>
+                      <tr>
+                      <td className="my-3"><DeleteBtn/></td>
+                      <th className="my-4 ">{ArrayofObjects[0].length+1+arrayNewObjects.indexOf(x)}  </th>
+                      <td className="my-4 ">{x.description}  </td>
+                      <td className="my-4 ">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td> 
+                      <td className="my-4 ">{JSON.stringify(x.date).slice(1,11)}  </td>
+                      </tr>
+                    )}
 
-                    <td >{ArrayofObjects[0] .map((x)=><li className="my-4"><DeleteBtn/></li>)}</td>
-                    <th scope="row">{ArrayofObjects[0].map((x)=><li className="my-4">{ArrayofObjects[0].indexOf(x)+1}  </li> )}</th>
-                    <td>{ArrayofObjects[0].map((x)=><li className="my-4 ">{x.description}  </li> )}</td>
-                    <td>{ArrayofObjects[0].map((x)=><li className="my-4 ">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></li> )}</td>
-                    <td>{ArrayofObjects[0].map((x)=><li className="my-4">{x.date}  </li> )}</td>
-                  </tr>
-                  <tr>
-                    <td >{arrayNewObjects && arrayNewObjects.map((x)=><li className="my-3"><DeleteBtn/></li>)}</td>
-                    <th scope="row">{arrayNewObjects && arrayNewObjects.map((x)=><li className="my-4 ">{ArrayofObjects[0].length+1+arrayNewObjects.indexOf(x)}  </li> )}</th>
-                    <td>{arrayNewObjects && arrayNewObjects.map((x)=><li className="my-4 ">{x.description}  </li> )}</td>
-                    <td>{arrayNewObjects && arrayNewObjects.map((x)=><li className="my-4 ">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></li> )}</td>
-                    <td>{arrayNewObjects && arrayNewObjects.map((x)=><li className="my-4 ">{JSON.stringify(x.date).slice(1,11)}  </li> )}</td>
-
-
-                  </tr>
                 </tbody>
               </table>
           
