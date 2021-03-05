@@ -17,37 +17,44 @@ function LoginForm() {
             
         })
     }
+
     function handleClick(event){
         event.preventDefault();
         const User={
-            user:input.user,
-            password:input.password,
-            
-        }
+        user:input.user,
+        password:input.password}
+
         axios.get('http://localhost:4000/posts')
-        .then((response) => {
-          
+            .then((response) => {
+            
             for(let x=0;x<response.data.length;x++){
                 if(response.data[x].user==User.user&&response.data[x].password==User.password){
-                    console.log("Acceso concedido")
                     var existe=true;
-                    window.location.href="./app"
-                    localStorage.setItem("user",response.data[0].user)
-                    response.data[0].expenses?
-                    localStorage.setItem("tasks",JSON.stringify(response.data[0].expenses)):
-                    localStorage.setItem("tasks",[])   
+                    localStorage.setItem("user",response.data[0].user)  
+                    localStorage.setItem("userId",response.data[0]._id) 
+                    const userId=localStorage.getItem("userId") 
+                    
+                        axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
+                        .then((res)=>{
+                            localStorage.setItem("tasks",JSON.stringify(res))
+                            window.location.href="./app"
+                        },(error)=>{console.log(error)})  
+                        
+                         
+
+                     
                     break;
                 }
             }
             if(existe!=true){
                 alert("Check user/password combination")
             }
+            
 
-        }, (error) => {
-            console.log(error);
-          });
+        }, (error) => {console.log(error)})
 
-          <Link className="d-block" to="/">Not Registered? Register</Link>
+        
+        
     }
 
     return (
