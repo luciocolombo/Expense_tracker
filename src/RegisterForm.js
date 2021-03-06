@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 
 function RegisterForm() {
     const [input, setInput]=useState({user:"",password:""})
+    let history = useHistory();
     function handleChange(event){
         const {name, value}=event.target;
         
@@ -33,9 +34,9 @@ function RegisterForm() {
                 if(response.data.message!==undefined){alert("This user already exists")
                 }else{
                 alert("User created")
-                /* let history = useHistory();
-                history.push("/app"); */
-                window.location.href='./app'
+                //ACA HACER LA CHANTAPUFEADA DE AXIOS.GET PARA QUE IMPORTE ALGO EN TASKS Y NO SE ROMPA
+                history.push("/app");
+                /* window.location.href='./app' */
                 }
             }else{alert("Please complete both fields")}
         });

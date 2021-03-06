@@ -4,11 +4,9 @@ import {Button} from 'react-bootstrap'
 
 function DeleteBtn({valueToDelete}) {
 
-   const handleDeleteValue=function(valueToDelete){
+   function handleDeleteValue(valueToDelete){
    console.log(valueToDelete)
-  
    }
-    
     return (
         <div>
             <Button onClick={handleDeleteValue} className="btn btn-danger btndelete"></Button>

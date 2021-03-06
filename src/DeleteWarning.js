@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Modal, Button} from 'react-bootstrap'
 import axios from 'axios'
+
 function DeleteWarning() {
   const [show, setShow] = useState(false);
 
@@ -17,13 +18,11 @@ function DeleteWarning() {
         axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
         .then((res)=>{
         localStorage.setItem("tasks",JSON.stringify(res))
-        /* let history = useHistory();
-        history.push("/app"); */
-                              
-        window.location.href='./app'
+        window.location.href='./app'         
         },(error)=>{console.log(error)})  
         
         )
+
     
 
     

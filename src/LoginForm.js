@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom"
 
 function LoginForm() {
     const [input, setInput]=useState({user:"",password:""})
-    
+    let history = useHistory();
     function handleChange(event){
         const {name, value}=event.target;
         
@@ -39,10 +39,8 @@ function LoginForm() {
                         axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
                         .then((res)=>{
                             localStorage.setItem("tasks",JSON.stringify(res))
-                            /* let history = useHistory();
-                            history.push("/app"); */
-                            
-                            window.location.href='./app'
+                            history.push("/app")
+                            /* window.location.href='./app' */
                         },(error)=>{console.log(error)})  
                         
                          
