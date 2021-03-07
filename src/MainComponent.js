@@ -10,7 +10,7 @@ function MainComponent() {
 //Divido los items en los ya guarados en DB de antes (arrayofobjects) y los nuevos en (arraynewobjects)
 var tasks=localStorage.getItem("tasks") //viene de un axios get
 var ArrayofObjects=Object.values(tasks!=""?JSON.parse(tasks)||{}:[])
-console.log("arrayoofobjects...", ArrayofObjects)
+/* console.log("arrayoofobjects...", ArrayofObjects) */
 var [arrayNewObjects,setArrayNewObjects]=useState([])
 var [total, setTotal]=useState(()=>{
   var partial=0
@@ -64,8 +64,7 @@ const btnHandler= function({amount, description, date}){
                 <tbody>                  
                     {ArrayofObjects[0] .map((x)=>
                     <tr>
-                      <td className="my-4"><DeleteBtn valueToDelete={x.id} /></td>
-                      <td>{x.id} es value to delete desde fuera del deletebtn</td>
+                      <td className="my-4"><DeleteBtn idExpenseToDelete={x._id} /></td>
                       <th className="my-4">{ArrayofObjects[0].indexOf(x)+1}  </th>
                       <td className="my-4 ">{x.description}  </td>
                       <td className="my-4 ">  <NumberFormat value={x.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
