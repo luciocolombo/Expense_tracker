@@ -11,11 +11,11 @@ function DeleteWarning() {
   const deleteAll=()=>{
     handleClose()
     const userId=localStorage.getItem("userId")
-    axios.delete(` http://localhost:4000/posts/expenses/${userId}` )
+    axios.delete(` https://expense-trakr.herokuapp.com/posts/expenses/${userId}` )
     .then((res)=>
         
         //Por alguna razon [] rompe el ArrayofObjectos[0] pero el objeto generico que devuelve axios (aunque no haya tasks) no. Por eso lo completo denuevo
-        axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
+        axios.get( ` https://expense-trakr.herokuapp.com/posts/expenses/${userId}` )
         .then((res)=>{
         localStorage.setItem("tasks",JSON.stringify(res))
         window.location.href='./app'         

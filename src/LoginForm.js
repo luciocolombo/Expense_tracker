@@ -26,7 +26,7 @@ function LoginForm() {
         user:input.user,
         password:input.password}
 
-        axios.get(`http://localhost:4000/posts/${User.user}`)
+        axios.get(`https://expense-trakr.herokuapp.com/posts/${User.user}`)
             .then((response) => {
             
          /*    console.log("resposne es...", response) */
@@ -37,7 +37,7 @@ function LoginForm() {
                     localStorage.setItem("userId",response.data._id) 
                     const userId=localStorage.getItem("userId") 
                     
-                        axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
+                        axios.get( ` https://expense-trakr.herokuapp.com/posts/expenses/${userId}` )
                         .then((res)=>{
                             localStorage.setItem("tasks",JSON.stringify(res))
                             history.push("/app")

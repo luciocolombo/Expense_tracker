@@ -23,23 +23,14 @@ var [total, setTotal]=useState(()=>{
   return partial
 }) 
 
-//la idea es que cargue la base de datos cada vez q recargas la pagina, asi no se ve info vieja
-/* useEffect({
-  const userId=localStorage.getItem("userId") 
-                    
-                        axios.get( ` http://localhost:4000/posts/expenses/${userId}` )
-                        .then((res)=>{
-                            localStorage.setItem("tasks",JSON.stringify(res))
-                           
-                        },(error)=>{console.log(error)})  
-}) */
+
 const btnHandler= function({amount, description, date}){
   const newData={description,amount,date}
   setArrayNewObjects([...arrayNewObjects,{description:description,amount:amount,date:date}])
   setTotal(prevTotal=>prevTotal*1+amount*1)
   console.log("el total es...", total)
   const userId=localStorage.getItem("userId")
-   axios.patch( `http://localhost:4000/posts/expense/${userId} `,newData)
+   axios.patch( `https://expense-trakr.herokuapp.com/posts/expense/${userId} `,newData)
    .then((response) => {console.log("info enviada a DB")}) 
    
 }

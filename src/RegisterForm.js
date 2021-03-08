@@ -27,7 +27,7 @@ function RegisterForm() {
             password:input.password,
             
         }
-        axios.post('http://localhost:4000/posts',newUser)
+        axios.post('https://expense-trakr.herokuapp.com/posts',newUser)
         .then((response) => {
             //response.data.message exists when there is an error, like when the user exists.
            if(newUser.user!==""&&newUser.password!=="") {    
