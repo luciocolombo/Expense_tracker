@@ -34,8 +34,9 @@ function RegisterForm() {
                 if(response.data.message!==undefined){alert("This user already exists")
                 }else{
                 alert("User created")
+                    
                 //ACA HACER LA CHANTAPUFEADA DE AXIOS.GET PARA QUE IMPORTE ALGO EN TASKS Y NO SE ROMPA
-                history.push("/app");
+                history.push("/login");
                 /* window.location.href='./app' */
                 }
             }else{alert("Please complete both fields")}
