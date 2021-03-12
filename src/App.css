@@ -16,7 +16,8 @@ footer {
   margin-top: 100px;
   margin-left: 3%;
   margin-right: 3%;
-  min-width: 500px;
+  position: absolute;
+  bottom: 0;
 }
 .btnadd {
   min-width: 150px;
@@ -38,4 +39,10 @@ footer {
 
 li {
   list-style: none;
+}
+
+@media screen and (max-width: 600px) {
+  .totalnumber {
+    text-align: center !important;
+  }
 }

@@ -62,14 +62,14 @@ function LoginForm() {
   
                 <Card.Body >
                     <Card.Title>Login</Card.Title>
-                    <form>
-                <label className="d-block" id="user">User </label>
-                <input className="d-block" onChange={handleChange} name="user" value={input.user} id="user" type="text" placeholder="User"></input>
-                <label className="d-block" id="password"> Password </label>
-                <input className="d-block" onChange={handleChange} name="password" value={input.password} id="password" type="password" placeholder="Password"></input>
-                <Button className="d-block my-3" onClick={handleClick}>Login</Button>
-            </form>
-                   <Link className="d-block" to="/register">Not Registered? Register</Link>
+                        <form>
+                            <label className="d-block" id="user">User </label>
+                            <input className="d-block" onChange={handleChange} name="user" value={input.user} id="user" type="text" placeholder="User"></input>
+                            <label className="d-block" id="password"> Password </label>
+                            <input className="d-block" onChange={handleChange} name="password" value={input.password} id="password" type="password" placeholder="Password"></input>
+                            <Button className="d-block my-3" onClick={handleClick}>Login</Button>
+                        </form>
+                        <Link className="d-block" to="/register">Not Registered? Register</Link>
                 </Card.Body>
             </Card>
         
