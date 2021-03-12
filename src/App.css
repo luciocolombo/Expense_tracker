@@ -1,7 +1,20 @@
 .App {
   margin-top: 2%;
   overflow: scroll;
+  min-width: 319px;
+  background: url("bg2.svg") no-repeat center;
+
+  background-size: 110%;
+  background-position-x: -30%;
+  background-position-y: 0%;
 }
+
+@media screen and(max-width:700px) {
+  .App {
+    background-position: center center !important;
+  }
+}
+
 .comp {
   width: 33.333%;
 }
@@ -10,14 +23,14 @@ input {
   width: 200px;
 }
 footer {
-  background-color: burlywood;
+  background-color: rgb(180, 180, 180);
   text-align: center;
+  font-size: small;
+  width: 80%;
   border: 1px solid black;
-  margin-top: 100px;
-  margin-left: 3%;
-  margin-right: 3%;
-  position: absolute;
+  position: sticky;
   bottom: 0;
+  left: 9%;
 }
 .btnadd {
   min-width: 150px;
@@ -45,4 +58,12 @@ li {
   .totalnumber {
     text-align: center !important;
   }
+}
+
+.bgimgdiv {
+  text-align: center;
+  margin: 0 auto;
+}
+.bgimg {
+  width: 300px;
 }

@@ -17,10 +17,10 @@ function InputBar({btnHandler  }) {
         alert("Please fill in all input fields")
     }
     return (
-        <div  className="my-4 mx-2 ">
+        <div  className="my-4 ">
             <form  onSubmit={e => e.preventDefault()}>
                     <section className="description"> 
-                        <label className="mr-1 ml-1" htmlFor="description">Description </label>
+                        <label className="mr-1" htmlFor="description">Description </label>
                         <input className="mr-3" id="description" value={description} onChange={e=>setDescription(e.target.value)} placeholder="Description" required></input>
                     </section>
                     <section className="amount">

@@ -4,6 +4,7 @@ import axios from "axios"
 import { Card, Button } from 'react-bootstrap';
 import { useHistory } from "react-router-dom"
 
+
 function LoginForm() {
     const [input, setInput]=useState({user:"",password:""})
     let history = useHistory();
@@ -57,7 +58,7 @@ function LoginForm() {
     }
 
     return (
-        <div>
+        <div className="loginForm">
             <Card border="primary" className="m-5 mx-auto" style={{ width: '18rem' }}>
   
                 <Card.Body >
@@ -73,9 +74,10 @@ function LoginForm() {
                 </Card.Body>
             </Card>
         
+            <div className="bgimgdiv">
+                <img className="bgimg" src="/bg.svg"></img>
+            </div>
         
-         {/*    
-            <h3><Link to="/login">Go to login</Link></h3> */}
             
         </div>
     )

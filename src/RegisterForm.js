@@ -60,9 +60,10 @@ function RegisterForm() {
                 </Card.Body>
             </Card>
         
-        
-         {/*    
-            <h3><Link to="/login">Go to login</Link></h3> */}
+            <div className="bgimgdiv">
+                <img className="bgimg" src="/bg.svg"></img>
+            </div>
+         
             
         </div>
     )
