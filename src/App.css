@@ -2,13 +2,18 @@
   margin-top: 2%;
   overflow: scroll;
   min-width: 319px;
-  background: url("bg2.svg") no-repeat center;
-
-  background-size: 110%;
-  background-position-x: -30%;
-  background-position-y: 0%;
 }
-
+.App::after {
+  content: "";
+  background: url("bg2.svg") no-repeat center;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
 @media screen and(max-width:700px) {
   .App {
     background-position: center center !important;

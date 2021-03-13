@@ -77,7 +77,7 @@ const btnHandler= function({amount, description, date}){
           
             </div>
          <h3 className="col-11 border text-right mt-3 ml-3 totalnumber">Total <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} /></h3>
-            <footer>This App was created by Lucio Colombo. It lets you save your data expenses for better money management. Don't worry, your data is encrypted</footer>
+            <footer>This App was created by Lucio Colombo. It lets you save your data expenses for better money management. </footer>
             
           </div>
     )
